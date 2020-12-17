@@ -1,8 +1,8 @@
- 2  est un nombre premier écrit par le processus 3697
- 3  est un nombre premier écrit par le processus 3710
- 5  est un nombre premier écrit par le processus 3715
- 7  est un nombre premier écrit par le processus 3720
- 11  est un nombre premier écrit par le processus 3733
- 13  est un nombre premier écrit par le processus 3739
- 17  est un nombre premier écrit par le processus 3746
- 19  est un nombre premier écrit par le processus 3757
+ 2  est un nombre premier écrit par le processus 1897
+ 3  est un nombre premier écrit par le processus 1908
+ 5  est un nombre premier écrit par le processus 1918
+ 7  est un nombre premier écrit par le processus 1932
+ 11  est un nombre premier écrit par le processus 1938
+ 13  est un nombre premier écrit par le processus 1945
+ 17  est un nombre premier écrit par le processus 1959
+ 19  est un nombre premier écrit par le processus 1965
