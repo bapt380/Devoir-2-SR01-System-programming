@@ -34,6 +34,7 @@
 launch_get_time (char **arg_get_time)
 {
     if (execv("./get_time", arg_get_time) == -1){
+        // filename + 
         perror("execv : ");
         exit(EXIT_FAILURE);
     }
@@ -50,6 +51,11 @@ launch_get_time (char **arg_get_time)
 application_manager ( int argc, char *argv[] )
 
 {
+   
+   //TODO ajouter les signaux/les états de chaque fils ?
+   // TODO int signal1; int signal2.... ?
+
+   
    pid_t get_time_id = fork();
    char *arg_get_time[] = {"get_time", NULL};
    /*if (get_time_id != 0){
@@ -63,10 +69,12 @@ application_manager ( int argc, char *argv[] )
 
       case 0:
           launch_get_time(arg_get_time);
+          // TODO ajouter un exit ici ? exit(7) par exemple pour l'arret du processus fils (peut etre useless ^^)
           break;
 
       default:
-          wait(NULL);
+          wait(NULL); // TODO wait(&signal1) ? je ne sais pas si c'est utile ou non
+          // TODO ne pas renvoyer le nom de l'application qui se ferme ?
           break;
   }
 
