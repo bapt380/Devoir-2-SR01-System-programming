@@ -1,28 +1,33 @@
 CC=gcc
 CFLAGS=-W -Wall -pedantic
 LDFLAGS=
-EXEC = application_manager 
-SRC = src/application_manager.c src/get_time.c
-OBJS = obj/application_manager.o obj/get_time.o
 
-all: application_manager get_time
+#Répertoires
+SRCDIR = src
+OBJDIR = obj
+BINDIR = bin
+
+EXEC = $(wildcard $(BINDIR)/*)
+SRC = $(wildcard $(SRCDIR)/*.c)
+OBJS = $(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+
+all: application_manager get_time network_manager
 
 #Exécutables
 
+network_manager: network_manager.o
+	$(CC) $(CFLAGS) $(OBJDIR)/$< -o $(BINDIR)/$@
+
 application_manager: application_manager.o
-	$(CC) $(CFLAGS) obj/application_manager.o -o bin/application_manager
+	$(CC) $(CFLAGS) $(OBJDIR)/$< -o $(BINDIR)/$@
 
 get_time: get_time.o
-	$(CC) $(CFLAGS) obj/get_time.o -o bin/get_time
+	$(CC) $(CFLAGS) $(OBJDIR)/$< -o $(BINDIR)/$@
 
 #Objets
 
-application_manager.o: src/application_manager.c
-	$(CC) $(CFLAGS) -c $< -o obj/application_manager.o
-
-get_time.o: src/get_time.c
-	$(CC) $(CFLAGS) -c $< -o obj/get_time.o
-
+%.o: src/%.c
+	$(CC) -c $< -o obj/$@ $(CFLAGS)
 
 #Nettoyage
 
@@ -30,5 +35,5 @@ clean:
 	rm -f $(OBJS) 
 
 mrproper: clean
-	rm -f bin/$(EXEC)
+	rm -f $(EXEC)
 
