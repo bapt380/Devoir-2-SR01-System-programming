@@ -21,10 +21,6 @@
 #include <errno.h>
 #include <sys/wait.h>
 
-#define READ 0
-#define WRITE 1
-
-
 
 /* 
  * ===  FUNCTION  ======================================================================
@@ -69,7 +65,7 @@ launch_application ( char *path, char **arg )
  * =====================================================================================
  */
     void
-case_get_time (pid_t get_time_id,pid_t father_id)
+case_get_time (pid_t get_time_id)
 {
     char *arg_get_time[] = {"get_time", NULL};
     switch(get_time_id){
@@ -101,10 +97,8 @@ case_get_time (pid_t get_time_id,pid_t father_id)
  * =====================================================================================
  */
     void
-case_network_manager (pid_t network_manager_id, pid_t father_id)
+case_network_manager (pid_t network_manager_id)
 {
-    printf("In case_network_manager: father_id:%d\n",father_id);
-    printf("In case_network_manager: id:%d\n",network_manager_id);
     char *arg_network_manager[] = {"network_manager", NULL};
     switch(network_manager_id){
         case -1:
@@ -144,19 +138,13 @@ main ( int argc, char *argv[] )
     pid_t get_time_id = fork();
     if (get_time_id != 0) network_manager_id = fork();
     
-#if 0
-    /*On s'assure que le processus qui rentre dans case_network_manager
-     * est soit le père, soit le processus network_manager*/
-    if(network_manager_id != -1 || get_time_id != 0 ){
-        printf("pid avant le case network %d\n",getpid());
-        case_network_manager(network_manager_id);
-        return EXIT_SUCCESS;
-    } 
-#endif
-    printf("father_id:%d\n",(int)father_id);
-    if(get_time_id == 0 || network_manager_id != 0) case_get_time(get_time_id,father_id);
+    /*On s'assure que le processus qui rentre dans case_X
+     * est soit le père, soit le processus X*/
+    if(get_time_id == 0 || network_manager_id != 0) case_get_time(get_time_id);
+#if 0 
     sleep(2);
-    if(get_time_id != 0 || network_manager_id == 0) case_network_manager(network_manager_id,father_id);
+#endif
+    if(get_time_id != 0 || network_manager_id == 0) case_network_manager(network_manager_id);
 
     return EXIT_SUCCESS;
 }				/* ----------  end of function main  ---------- */
