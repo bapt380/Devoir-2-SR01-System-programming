@@ -1,8 +1,8 @@
- 2  est un nombre premier écrit par le processus 1897
- 3  est un nombre premier écrit par le processus 1908
- 5  est un nombre premier écrit par le processus 1918
- 7  est un nombre premier écrit par le processus 1932
- 11  est un nombre premier écrit par le processus 1938
- 13  est un nombre premier écrit par le processus 1945
- 17  est un nombre premier écrit par le processus 1959
- 19  est un nombre premier écrit par le processus 1965
+2  est un nombre premier écrit par le processus 9492
+3  est un nombre premier écrit par le processus 9493
+5  est un nombre premier écrit par le processus 9494
+7  est un nombre premier écrit par le processus 9495
+11  est un nombre premier écrit par le processus 9496
+13  est un nombre premier écrit par le processus 9498
+17  est un nombre premier écrit par le processus 9499
+19  est un nombre premier écrit par le processus 9500
