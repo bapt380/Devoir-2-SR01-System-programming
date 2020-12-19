@@ -21,7 +21,6 @@
 #include <errno.h>
 #include <sys/wait.h>
 
-#include "get_time.c"
 
 
 /* 
@@ -33,9 +32,9 @@
     void
 launch_get_time (char **arg_get_time)
 {
-    if (execv("./get_time", arg_get_time) == -1){
+    if (execv("./bin/get_time", arg_get_time) == -1){
         // filename + //Je vais faire un commentaire de commentaire là
-        perror("execv  ");
+        perror("execv");
         exit(EXIT_FAILURE);
     }
 }		/* -----  end of function lauch_get_time  ----- */
@@ -48,7 +47,7 @@ launch_get_time (char **arg_get_time)
  * =====================================================================================
  */
     int
-application_manager ( int argc, char *argv[] )
+main ( int argc, char *argv[] )
 
 {
    
@@ -61,7 +60,7 @@ application_manager ( int argc, char *argv[] )
       }*/
     switch(get_time_id){
         case -1:
-            perror("fork  ");
+            perror("fork");
             exit(EXIT_FAILURE);
             break;
 
@@ -71,7 +70,6 @@ application_manager ( int argc, char *argv[] )
             break;
 
         default:
-            printf("Test père");
             wait(&status_get_time); 
             if(WIFEXITED(status_get_time)){
                 printf("Terminaison normale de get_time avec le code %d\n",WEXITSTATUS(status_get_time));
