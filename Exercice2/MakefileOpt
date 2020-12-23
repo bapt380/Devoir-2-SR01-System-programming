@@ -4,7 +4,7 @@ CC = gcc
 
 #Exécutables
 
-Prog_premiers2 : $(OBJS)
+Prog_premiers : $(OBJS)
 	$(CC) -o $@ $(OBJS)
 
 main.o: explorer.h
@@ -15,6 +15,12 @@ premier.o : premier.h
 
 my_system.o : my_system.h
 
+.c.o :
+	gcc -c $<
+
 clean :
-	rm -f Prog_premiers2 $(OBJS)
+	rm -f Prog_premiers $(OBJS)
+
+# Commande qui permet de tester le bon fonctionnement
+# make -f MakefileOpt puis ./Prog_premiers
 
