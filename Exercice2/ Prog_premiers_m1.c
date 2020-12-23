@@ -8,6 +8,11 @@
 
 #include<string.h>
 
+/*
+1) Écrire le  pid  du  processus  qui  a créé le  processus system et  le  père  de  ce processus (processus qui exécute la boucle for)
+2) Écrire le pid du processus qui a écrit le message sur le terminal
+*/
+
 int premier(int nb) {
     int r = 0;
     for (int i = 1; i <= nb; i++) {
@@ -19,7 +24,7 @@ int premier(int nb) {
 
 void explorer(int debut, int fin) {
     int etat, pid, pid2;
-    pid = fork(); // creer pere / fils
+    pid = fork(); // processus qui exécute la boucle for
 
     if (pid == 0) { // on est dans le fils
 
