@@ -77,10 +77,14 @@ case_get_time (pid_t get_time_id)
 
         case 0:
             launch_application("./bin/get_time",arg_get_time);
+<<<<<<< HEAD
+=======
+            // TODO pourquoi il n'y a pas d'exit ici et ça fonctionne quand même avec le pid ?
+>>>>>>> 4011a791b1d154e62e96b2d9ad4011e983f74c93
             break;
 
         default:
-            printf("[application_manger] father process: waiting for get_time...\n");
+            printf("father process: waiting for get_time...\n");
             wait_process("get_time");
 
             break;
