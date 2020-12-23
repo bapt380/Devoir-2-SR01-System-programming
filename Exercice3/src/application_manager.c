@@ -77,7 +77,7 @@ case_get_time (pid_t get_time_id)
         case 0:
             printf("lauching get_time with pid:%d\n",getpid());
             launch_application("./bin/get_time",arg_get_time);
-
+            // TODO pourquoi il n'y a pas d'exit ici et ça fonctionne quand même avec le pid ?
             break;
 
         default:
