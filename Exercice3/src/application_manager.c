@@ -34,10 +34,10 @@ wait_process ( char* process_name )
     int status;
     waitpid(-1,&status,0);
     if(WIFEXITED(status)){
-        printf("Terminaison normale de %s avec le code %d\n",process_name,WEXITSTATUS(status));
+        printf("[application manager] Terminaison normale de %s avec le code %d\n",process_name,WEXITSTATUS(status));
     } 
     if(WIFSIGNALED(status)){
-        printf("Le processus %s a été terminé par le signal %d\n",process_name,WTERMSIG(status));
+        printf("[application manager] Le processus %s a été terminé par le signal %d\n",process_name,WTERMSIG(status));
     }
 
 
@@ -51,6 +51,7 @@ wait_process ( char* process_name )
     void
 launch_application ( char *path, char **arg )
 {
+    printf("[application manager] lauching %s with pid %d\n",arg[0],getpid());
     if(execv(path,arg)== -1){
         perror("execv");
             exit(EXIT_FAILURE);
@@ -75,9 +76,11 @@ case_get_time (pid_t get_time_id)
             break;
 
         case 0:
-            printf("lauching get_time with pid:%d\n",getpid());
             launch_application("./bin/get_time",arg_get_time);
+<<<<<<< HEAD
+=======
             // TODO pourquoi il n'y a pas d'exit ici et ça fonctionne quand même avec le pid ?
+>>>>>>> 4011a791b1d154e62e96b2d9ad4011e983f74c93
             break;
 
         default:
@@ -107,14 +110,13 @@ case_network_manager (pid_t network_manager_id)
             break;
 
         case 0:
-            printf("lauching network_manager with pid:%d\n",getpid());
-            sleep(2);
             launch_application("./bin/network_manager",arg_network_manager);
-
             break;
 
         default:
-            printf("father process: waiting for network_manager...\n");
+            printf("[application manager] father process: waiting for network_manager...\n");
+            sleep(10);
+            kill(network_manager_id,SIGKILL);
             wait_process("network_manager");
             break;
     }
@@ -131,9 +133,6 @@ case_network_manager (pid_t network_manager_id)
 main ( int argc, char *argv[] )
 
 {
-
-
-    int father_id = getpid();
     pid_t network_manager_id = -1;
     pid_t get_time_id = fork();
     if (get_time_id != 0) network_manager_id = fork();
