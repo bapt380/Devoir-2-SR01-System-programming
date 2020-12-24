@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <signal.h>
 
 void main (int argc , char *argv[]) {
 
@@ -19,6 +20,8 @@ void main (int argc , char *argv[]) {
 	  fp = fopen (argv[1], "w"); 
 	  fputs("0", fp);
    	  fclose(fp);
+          printf("[power manager] sending signal SIGUSR1 to %d\n",(int)getppid());
+          kill(getppid(),SIGUSR1);
           exit(EXIT_SUCCESS);
        }
        sleep(atoi(argv[2]));
