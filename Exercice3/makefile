@@ -11,9 +11,12 @@ EXEC = $(wildcard $(BINDIR)/*)
 SRC = $(wildcard $(SRCDIR)/*.c)
 OBJS = $(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
-all: application_manager get_time network_manager
+all: application_manager get_time network_manager power_manager
 
 #Exécutables
+
+power_manager: power_manager.o
+	$(CC) $(CFLAGS) $(OBJDIR)/$< -o $(BINDIR)/$@
 
 network_manager: network_manager.o
 	$(CC) $(CFLAGS) $(OBJDIR)/$< -o $(BINDIR)/$@
