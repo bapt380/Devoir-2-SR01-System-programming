@@ -19,6 +19,7 @@ void main (int argc , char *argv[]) {
 	  fp = fopen (argv[1], "w"); 
 	  fputs("0", fp);
    	  fclose(fp);
+          exit(EXIT_SUCCESS);
        }
        sleep(atoi(argv[2]));
  }
