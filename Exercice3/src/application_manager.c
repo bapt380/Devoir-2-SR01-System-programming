@@ -25,8 +25,6 @@
 
 
 #define MAX 20
-#define TRUE 1
-#define FALSE 0
 /* Déclaration des pid */
 pid_t get_time_id;
 pid_t network_manager_id;
@@ -42,6 +40,7 @@ pid_t power_manager_id;
     void
 handle_sigusr1 ( int sig )
 {
+    /*  TODO : fermer plus proprement */
     printf("[application manager] signal %d has been received, closing child processes...\n",(int)sig);
     kill(get_time_id,SIGTERM);
     kill(network_manager_id,SIGTERM);
