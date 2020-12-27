@@ -34,25 +34,53 @@ pid_t power_manager_id;
 /* 
  * ===  FUNCTION  ======================================================================
  *         Name:  handle_sigusr1
- *  Description:  
+ *  Description: Handler de SIGUSR1. Ferme tous les processus fils si ils existent, sauf
+ *  power_manager qui doit se terminer de lui-même
  * =====================================================================================
  */
     void
 handle_sigusr1 ( int sig )
 {
-    /*  TODO : fermer plus proprement */
     printf("[application manager] signal %d has been received, closing child processes...\n",(int)sig);
-    kill(get_time_id,SIGTERM);
-    kill(network_manager_id,SIGTERM);
-    wait(NULL);
+
+    if (kill(get_time_id,0) == 0){
+        printf("[application manager] closing get_time...");
+        if (kill(get_time_id,SIGTERM)==0) printf("[application manager] get_time was terminated by signal %d\n",SIGTERM); 
+        else perror("kill ");
+    }
+    if (kill(network_manager_id,0) == 0){
+        printf("[application manager] closing network_manager...\n");
+        if (kill(network_manager_id,SIGTERM)==0) printf("[application manager] network_manager was terminated by signal %d\n",SIGTERM); 
+        else perror("kill ");
+    }
+
+    int status;
+    waitpid(power_manager_id,&status,0);
+    if(WIFEXITED(status))
+            printf("[application_manager] power_manager terminated normally with exit code %d\n",WEXITSTATUS(status));
 
     exit(EXIT_SUCCESS);
 }		/* -----  end of function handle_sigusr1  ----- */
 
+
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  atexit_function
+ *  Description:  Affiche un message lorsque lors de la fermeture de application_manager
+ * =====================================================================================
+ */
+    void
+atexit_function ( )
+{
+    printf("[application manager] Goodbye!\n");
+}		/* -----  end of function exit_function  ----- */
+
 /* 
  * ===  FUNCTION  ======================================================================
  *         Name:  launch_application
- *  Description:  
+ *  Description:  Lance l'application qui correspond au path en paramètre et affiche
+ *  le pid du processus appelant
  * =====================================================================================
  */
     void
@@ -69,7 +97,8 @@ launch_application ( char *path, char **arg )
 /* 
  * ===  FUNCTION  ======================================================================
  *         Name:  application manager
- *  Description:  
+ *  Description:  Créé les processus, lance les applications correspondantes, puis
+ *  attend qu'ils se terminent
  * =====================================================================================
  */
     int
@@ -81,6 +110,7 @@ main ( int argc, char *argv[] )
     sigaction(SIGUSR1, &sa, NULL);
 
     pid_t father_id = getpid();
+    atexit(atexit_function);
 
 
     char *arg_power_manager[] = {"power_manager", "./mise_en_veille.txt", "4", NULL};
@@ -88,7 +118,7 @@ main ( int argc, char *argv[] )
     char *arg_network_manager[] = {"network_manager", NULL};
 
 
-    /*  Création des processus fils (TODO: créer une fonction create_process si jamais on a le temps) */
+    /*  Création des processus fils */
     get_time_id = fork();
     assert(get_time_id != -1);
 
