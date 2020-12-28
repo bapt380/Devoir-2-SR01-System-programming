@@ -19,10 +19,10 @@ int premier(int nb) {
 }
 
 void explorer(int debut, int fin) {
-    int etat, pid, pid2, cpt=0;
+    int etat, pid, pid2, cpt_pid=0;
     pid = fork(); // creer pere / fils
     if (pid == 0) { // on est dans le fils
-        pid_t parentID = getpid();
+        pid_t ID_parent = getpid();
         for (int i = debut; i <= fin; i++) {
 
             if (premier(i) == 1) { // si l'indice est premier
@@ -44,19 +44,18 @@ void explorer(int debut, int fin) {
                     //wait(&etat); // on attent le fils
                     // wait enregistre les informations sur l'état/le statut du fils dans l'entier "etat".
                     // instruction 41
-                    //pids[cpt++]=pid2;
-                    cpt++;
-
+                    cpt_pid++; // permet de compter le nombre de pid exécutés en parallèle
                 }
             }
         }
         // supression des zombies
-        if(parentID==getpid()){
-            while(cpt > 0)
+        // verification un peu optionnel
+        if(ID_parent==getpid()){
+            while(cpt_pid > 0)
             {
                 pid2 = wait(&etat);
                 printf("\nProcessus %d terminé.\n", pid2);
-                cpt--;
+                cpt_pid--;
             }
         }
 
