@@ -8,10 +8,6 @@
 
 #include<string.h>
 
-/*
-1) Écrire le  pid  du  processus  qui  a créé le  processus system et  le  père  de  ce processus (processus qui exécute la boucle for)
-2) Écrire le pid du processus qui a écrit le message sur le terminal
-*/
 
 int premier(int nb) {
     int r = 0;
