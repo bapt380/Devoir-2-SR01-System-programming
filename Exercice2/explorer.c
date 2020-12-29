@@ -1,4 +1,6 @@
 #include "explorer.h"
+#include "premier.h"
+#include "my_system.h"
 
 
 void explorer(int debut, int fin) {

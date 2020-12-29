@@ -1,5 +1,5 @@
-#ifndef H_LIBRARY
-#define H_LIBRARY
+#ifndef H_EXPLORER
+#define H_EXPLORER
 #include<unistd.h>
 
 #include<stdio.h>
@@ -10,6 +10,6 @@
 
 #include<string.h>
 
-#endif
 
 void explorer(int debut, int fin);
+#endif

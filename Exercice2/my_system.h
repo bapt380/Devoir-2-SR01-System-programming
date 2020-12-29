@@ -1,5 +1,5 @@
-#ifndef H_LIBRARY
-#define H_LIBRARY
+#ifndef H_MYSYSTEM
+#define H_MYSYSTEM
 #include<unistd.h>
 
 #include<stdio.h>
@@ -10,8 +10,8 @@
 
 #include<string.h>
 
-#endif
 
 int my_system(char  *argv);
+#endif
 
 

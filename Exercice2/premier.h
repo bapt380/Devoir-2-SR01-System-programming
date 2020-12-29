@@ -1,5 +1,5 @@
-#ifndef H_LIBRARY
-#define H_LIBRARY
+#ifndef H_PREMIER
+#define H_PREMIER
 #include<unistd.h>
 
 #include<stdio.h>
@@ -10,6 +10,7 @@
 
 #include<string.h>
 
-#endif
+
 
 int premier(int nb);
+#endif
