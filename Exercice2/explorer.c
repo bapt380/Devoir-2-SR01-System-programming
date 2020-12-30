@@ -2,6 +2,7 @@
 #include "premier.h"
 #include "my_system.h"
 
+// Nous avons utilisé la fonction explorer de Prog_premiers_m2.c
 
 void explorer(int debut, int fin) {
     int etat, pid, pid2;

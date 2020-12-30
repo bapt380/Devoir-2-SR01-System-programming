@@ -49,7 +49,7 @@ void explorer(int debut, int fin) {
             }
         }
         // supression des zombies
-        // verification un peu optionnel
+        // verification un peu optionnelle
         if(ID_parent==getpid()){
             while(cpt_pid > 0)
             {

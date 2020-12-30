@@ -1,8 +1,0 @@
-2  est un nombre premier écrit par le processus 6160
-3  est un nombre premier écrit par le processus 6166
-5  est un nombre premier écrit par le processus 6172
-7  est un nombre premier écrit par le processus 6186
-11  est un nombre premier écrit par le processus 6192
-13  est un nombre premier écrit par le processus 6199
-17  est un nombre premier écrit par le processus 6213
-19  est un nombre premier écrit par le processus 6219
